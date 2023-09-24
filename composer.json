@@ -1,0 +1,19 @@
+{
+    "name": "abrz/wp-plugin-frm",
+    "description": "This is a framework for wordpress plugin development",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "abrz2455\\WPDF\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali Barzegar Rahimi"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
