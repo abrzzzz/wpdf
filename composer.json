@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "abrz2455\\WPDF\\": "src/"
+            "Abrz\\WPDF\\": "src/"
         }
     },
     "authors": [
