@@ -6,14 +6,16 @@
     "autoload": {
         "psr-4": {
             "Abrz\\WPDF\\": "src/"
-        }
+        },
+        "files": ["./helpers.php"]
     },
     "authors": [
         {
             "name": "Ali Barzegar Rahimi"
         }
     ],
-    "require": {},
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "require": {
+        "illuminate/database": "^8.83",
+        "illuminate/events": "^8.83"
+    }
 }
