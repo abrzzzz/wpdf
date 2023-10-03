@@ -1,22 +1,22 @@
 <?php 
-namespace Abrz\WPDF;
+namespace Abrz\WPDF\Services;
+
+use Abrz\WPDF\Blueprint;
+use Abrz\WPDF\Facades\App;
+use Abrz\WPDF\Foundation\Application;
 use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 use ReflectionClass;
 
-final class DB
+class DB
 {
     private static $blueprint;
-
-    private static $DB_PATH;
 
     public static function boot() : Capsule
     {
         global $wpdb;
      
-        self::$DB_PATH = defined('WPDF_DB_PATH') ? constant('WPDF_DB_PATH') : "" ;
-
         if(!self::$blueprint){
 
             $capsule = new Capsule();
@@ -47,8 +47,9 @@ final class DB
     public static function up($classes = [])
     {
         self::boot();
+
         $tables = count($classes) ? $classes : FileRegistery::getInstance()
-        ->getClassesFromPath(self::$DB_PATH);
+        ->getClassesFromPath(App::getDatabasePath());
         if($tables){
             for ($i=0; $i < count($tables); $i++) {
                 $table = new ReflectionClass($tables[$i]);
@@ -66,8 +67,9 @@ final class DB
     public static function down($classes = [])
     {
         self::boot();
+
         $tables = count($classes) ? $classes : FileRegistery::getInstance()
-        ->getClassesFromPath(self::$DB_PATH);
+        ->getClassesFromPath(App::getDatabasePath());
         if($tables){
             for ($i=0; $i < count($tables); $i++) { 
                 $table = new ReflectionClass($tables[$i]);

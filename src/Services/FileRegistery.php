@@ -1,5 +1,6 @@
 <?php 
-namespace Abrz\WPDF;
+namespace Abrz\WPDF\Services;
+
 use Abrz\WPDF\Contracts\RegisteryContract;
 
 class FileRegistery implements RegisteryContract
