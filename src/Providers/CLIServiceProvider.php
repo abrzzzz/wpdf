@@ -2,16 +2,16 @@
 namespace Abrz\WPDF\Providers;
 
 use Abrz\WPDF\Foundation\Application;
-use Abrz\WPDF\Services\DB;
 use Illuminate\Support\ServiceProvider;
+use WP_CLI;
 
-class DBServiceProvider extends ServiceProvider
+class CLIServiceProvider extends ServiceProvider
 {
    
     public function register() : void 
     {
-        $this->app->bind('db', function(Application $app){
-            return new DB();
+        $this->app->singleton('cli', function(Application $app){
+            return  new WP_CLI();
         });
     }
 

@@ -15,7 +15,11 @@
         }
     ],
     "require": {
-        "illuminate/database": "^8.83",
-        "illuminate/events": "^8.83"
+        "illuminate/database": "^10.26",
+        "illuminate/events": "^10.26",
+        "illuminate/config": "^10.26",
+        "vlucas/phpdotenv": "^5.5",
+        "symfony/var-dumper": "^6.3",
+        "wp-cli/wp-cli-bundle": "^2.8"
     }
 }

@@ -2,6 +2,7 @@
 namespace Abrz\WPDF\Foundation;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\ServiceProvider;
 use ReflectionClass;
 
 class Application extends Container
@@ -71,30 +72,46 @@ class Application extends Container
         return $config['providers'];
     }
 
-
-    
     
     private function registerServices() : self 
     {
-        foreach ($this::getProviders() as $key => $value) {
-            $service = new ReflectionClass($value);
-            $service = $service->newInstance($this);
-            if(method_exists($service, 'register'))
+        foreach ($this::getProviders() as $key => $value) 
+        {
+            $provider = new ReflectionClass($value);
+            $provider = $provider->newInstance($this);
+            if(method_exists($provider, 'register'))
             {
-                $service->register();
+                $provider->register();
             }
+
+
+            
+            if (method_exists($provider, 'boot')) {
+                $this->call([$provider, 'boot']);
+            }
+    
         }
         return $this;
     }
 
-    private function registerBindedServices() : self 
+    private function registerBaseServices() : void 
     {
         
     }
 
-    private function setServiceAilases() : self
+    private function setServiceAilases() : void
     {
-        return $this;;
+        foreach ([
+            'db' => [\Illuminate\Database\DatabaseManager::class, \Illuminate\Database\ConnectionResolverInterface::class],
+            'db.connection' => [\Illuminate\Database\Connection::class, \Illuminate\Database\ConnectionInterface::class],
+            'db.schema' => [\Illuminate\Database\Schema\Builder::class],
+            'config' => [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],
+            'events' => [\Illuminate\Events\Dispatcher::class, \Illuminate\Contracts\Events\Dispatcher::class],
+        ] as $key => $aliases) {
+            foreach ($aliases as $alias) {
+                $this->alias($key, $alias);
+            }
+        }
     }
 
 } 
