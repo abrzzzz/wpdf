@@ -15,4 +15,10 @@ class MigrationServiceProvider extends ServiceProvider
         });
     }
 
+    public function boot()
+    {
+        
+    }
+
+
 }

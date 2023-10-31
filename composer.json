@@ -20,6 +20,7 @@
         "illuminate/config": "^10.26",
         "vlucas/phpdotenv": "^5.5",
         "symfony/var-dumper": "^6.3",
-        "wp-cli/wp-cli-bundle": "^2.8"
+        "wp-cli/wp-cli-bundle": "^2.8",
+        "illuminate/filesystem": "^10.30"
     }
 }
