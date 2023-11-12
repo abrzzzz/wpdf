@@ -83,6 +83,7 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
             'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\Dotenv\\' => 25,
             'Symfony\\Component\\Console\\' => 26,
             'Seld\\PharUtils\\' => 15,
             'Seld\\JsonLint\\' => 14,
@@ -125,6 +126,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
             'GrahamCampbell\\ResultType\\' => 26,
             'Gettext\\Languages\\' => 18,
             'Gettext\\' => 8,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
         ),
         'D' => 
         array (
@@ -229,6 +234,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         array (
             0 => __DIR__ . '/..' . '/symfony/filesystem',
         ),
+        'Symfony\\Component\\Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dotenv',
+        ),
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
@@ -327,6 +336,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         'Gettext\\' => 
         array (
             0 => __DIR__ . '/..' . '/gettext/gettext/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Dotenv\\' => 
         array (

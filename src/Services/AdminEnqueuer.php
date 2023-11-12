@@ -1,33 +1,30 @@
 <?php 
 namespace Abrz\WPDF\Services;
 
-use Abrz\WPDF\Contracts\HookerContract;
-use Abrz\WPDF\Facades\File;
-
-class AdminEnqueuer implements HookerContract
+class AdminEnqueuer
 {
 
-
-    public function hooks()
+    public function __construct()
     {
-        // add_action( 'admin_enqueue_scripts', [$this, 'js'] );
-        // add_action( 'admin_enqueue_scripts', [$this, 'css'] );
-    
+        add_action( 'admin_enqueue_scripts', [$this, 'js'] );
+        add_action( 'admin_enqueue_scripts', [$this, 'css'] );
     }
 
     public static function js($path)
     {
-        if(File::is_file($path) && pathinfo($path, PATHINFO_EXTENSION) == 'js')
+        $actual_path = WPDF_PLUGIN_PATH . $path;
+        if(file_exists($actual_path) && pathinfo($actual_path, PATHINFO_EXTENSION) == 'js')
         {
-            wp_enqueue_script('wpfrm_admin_js_'. basename($path, '.js'), $path);
+            wp_enqueue_script('wpfrm_admin_js_'. basename($path, '.js'), WPDF_PLUGIN_URI . $path);
         }
     }
 
     public static function css($path)
     {
-        if(File::is_file($path) && pathinfo($path, PATHINFO_EXTENSION) == 'css')
+        $actual_path = WPDF_PLUGIN_PATH . $path;
+        if(file_exists($actual_path) && pathinfo($actual_path, PATHINFO_EXTENSION) == 'css')
         {
-            wp_enqueue_style('wpfrm_admin_css_'. basename($path, '.js'), $path);
+            wp_enqueue_style('wpfrm_admin_css_'. basename($path, '.js'), WPDF_PLUGIN_URI . $path);
         }
     }
 

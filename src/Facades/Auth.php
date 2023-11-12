@@ -3,12 +3,12 @@ namespace Abrz\WPDF\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class App extends Facade
+class Auth extends Facade
 {
 
     protected static function getFacadeAccessor() : string 
     {
-        return "app";   
+        return "auth";   
     }
 
 }

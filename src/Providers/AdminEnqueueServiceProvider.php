@@ -26,9 +26,8 @@ class AdminEnqueueServiceProvider extends ServiceProvider
     public function boot()
     {
         
-        $scripts = $this->app->make('config')->get('enqueue')['admin'];
         $enqueuer = $this->app->make('admin_enqueuer');
-        $js = $scripts['js'];
+        $js =  config('enqueue.admin.js');
         if($cjs = count($js))
         {
             for ($i=0; $i < $cjs; $i++) { 
@@ -36,16 +35,13 @@ class AdminEnqueueServiceProvider extends ServiceProvider
             }
         }
 
-        $css = $scripts['css'];
+        $css = config('enqueue.admin.css');
         if($ccss = count($css))
         {
             for ($i=0; $i < $ccss; $i++) { 
                 $enqueuer->css($css[$i]);
             }
         }
-
-        $enqueuer->hooks();
-
 
     }
 
