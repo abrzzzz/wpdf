@@ -23,8 +23,11 @@
         "vlucas/phpdotenv": "^5.5",
         "symfony/var-dumper": "^6.3",
         "wp-cli/wp-cli-bundle": "^2.8",
-        "illuminate/filesystem": "^10.30",
+        "illuminate/filesystem": "^10.35",
         "symfony/dotenv": "^6.3",
-        "firebase/php-jwt": "^6.9"
+        "firebase/php-jwt": "^6.9",
+        "illuminate/http": "^10.32",
+        "illuminate/view": "^10.35",
+        "illuminate/cache": "^10.35"
     }
 }

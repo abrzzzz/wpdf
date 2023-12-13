@@ -18,12 +18,13 @@ class Migration
         if($classes)
         {
             collect($classes)->each(fn($class) => $class::up());
+            return;
         } 
 
-        $files = FileDirect::dirlist(App::getDatabasePath());
+        $files = FileDirect::dirlist(App::databasePath());
         foreach ($files as $name => $meta) 
         {
-            $class = Extractor::getClassFromFile($name, App::getDatabasePath());
+            $class = Extractor::getClassFromFile($name, App::databasePath());
             if($class)
             {
                 $class::up();                               
@@ -47,10 +48,10 @@ class Migration
             return;
         }
 
-        $files = FileDirect::dirlist(App::getDatabasePath());
+        $files = FileDirect::dirlist(App::databasePath());
         foreach ($files as $name => $meta) 
         {
-            $class = Extractor::getClassFromFile($name, App::getDatabasePath());
+            $class = Extractor::getClassFromFile($name, App::databasePath());
             if($class)
             {
                 $class::down();                               

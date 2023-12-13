@@ -1,6 +1,8 @@
 <?php 
 namespace Abrz\WPDF\Foundation;
 
+use Abrz\WPDF\Services\Route\RouteCollector;
+use Abrz\WPDF\Services\Route\RouteServiceProvider;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Foundation\Application as FoundationApplication;
@@ -11,6 +13,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Env;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use ReflectionClass;
 use RuntimeException;
 
 class Application extends Container implements FoundationApplication 
@@ -167,15 +170,24 @@ class Application extends Container implements FoundationApplication
         if ($basePath) {
             $this->setBasePath($basePath);
         }
-
+        
+        do_action('wpfm_init', $this);
         $this->registerBaseBindings();
         $this->registerBaseServiceProviders();
         $this->registerCoreContainerAliases();
         
+        do_action('wpfm_before_load_configuration', $this);
         (new LoadConfiguration())->bootstrap($this);
         (new BootProviders)->bootstrap($this);
         (new RegisterFacades)->bootstrap($this);
+
+        do_action('wpfm_before_register_configured_providers', $this);
         $this->registerConfiguredProviders();
+
+        do_action('wpfm_initialized', $this);
+
+        RouteCollector::make();
+
     }
 
 
@@ -218,8 +230,8 @@ class Application extends Container implements FoundationApplication
     protected function registerBaseServiceProviders()
     {
         $this->register(new EventServiceProvider($this));
+        $this->register(new RouteServiceProvider($this));
         // $this->register(new LogServiceProvider($this));
-        // $this->register(new RoutingServiceProvider($this));
     }
 
     /**
@@ -661,10 +673,13 @@ class Application extends Container implements FoundationApplication
      */
     public function register($provider, $force = false)
     {
+
+        
         if (($registered = $this->getProvider($provider)) && ! $force) {
             return $registered;
         }
-
+        
+        do_action('wpfm_before_register_provider', $provider);
         // If the given "provider" is a string, we will resolve it, passing in the
         // application instance automatically for the developer. This is simply
         // a more convenient way of specifying your service provider classes.
@@ -691,6 +706,11 @@ class Application extends Container implements FoundationApplication
 
         $this->markAsRegistered($provider);
 
+        
+        $class = new ReflectionClass($provider);
+        do_action('wpfm_after_register_provider', $provider);
+        do_action('wpfm_after_register_provider_' . $class->getShortName(), $this);
+        
         // If the application has already booted, we will call this boot method on
         // the provider class so it has an opportunity to do its boot logic and
         // will be ready for any usage by this developer's application logic.
@@ -1281,6 +1301,21 @@ class Application extends Container implements FoundationApplication
             'db.schema' => [\Illuminate\Database\Schema\Builder::class],
             'config' => [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],
             'events' => [\Illuminate\Events\Dispatcher::class, \Illuminate\Contracts\Events\Dispatcher::class],
+            'route' => [\Abrz\WPDF\Services\Route\RouteServiceProvider::class],
+            'request' => [\Illuminate\Http\Request::class, \Symfony\Component\HttpFoundation\Request::class],
+            'files' => [\Illuminate\Filesystem\Filesystem::class],
+            'filesystem' => [\Illuminate\Filesystem\FilesystemManager::class, \Illuminate\Contracts\Filesystem\Factory::class],
+            'filesystem.disk' => [\Illuminate\Contracts\Filesystem\Filesystem::class],
+            'filesystem.cloud' => [\Illuminate\Contracts\Filesystem\Cloud::class],
+            'cache' => [\Illuminate\Cache\CacheManager::class, \Illuminate\Contracts\Cache\Factory::class],
+            'cache.store' => [\Illuminate\Cache\Repository::class, \Illuminate\Contracts\Cache\Repository::class, \Psr\SimpleCache\CacheInterface::class],
+            'cache.psr6' => [\Symfony\Component\Cache\Adapter\Psr16Adapter::class, \Symfony\Component\Cache\Adapter\AdapterInterface::class, \Psr\Cache\CacheItemPoolInterface::class],
+            'config' => [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],
+            'blade.compiler' => [\Illuminate\View\Compilers\BladeCompiler::class],
+            'session' => [\Illuminate\Session\SessionManager::class],
+            'session.store' => [\Illuminate\Session\Store::class, \Illuminate\Contracts\Session\Session::class],
+            'view' => [\Illuminate\View\Factory::class, \Illuminate\Contracts\View\Factory::class],
+
         ] as $key => $aliases) {
             foreach ($aliases as $alias) {
                 $this->alias($key, $alias);
