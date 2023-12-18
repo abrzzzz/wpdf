@@ -1,18 +1,11 @@
 <?php 
 namespace Abrz\WPDF\Services\Route;
 
-use Abrz\WPDF\Contracts\MiddlewareContract;
-use Abrz\WPDF\Include\Middleware\Middleware;
-use Abrz\WPDF\Services\Route\Concretes\AdminRoute;
-use Abrz\WPDF\Services\Route\Concretes\AjaxRoute;
-use Abrz\WPDF\Services\Route\Concretes\RestRoute;
-use Abrz\WPDF\Services\Route\Concretes\WebRoute;
 use Abrz\WPDF\Services\Route\Contracts\RouteContract;
 use Abrz\WPDF\Services\Route\Enums\RouteHttpMethodEnum;
 use Abrz\WPDF\Services\Route\Enums\RouteScopeEnum;
-use Illuminate\Support\Collection;
 
-class Route
+abstract class Route
 {
 
     protected string $path;
@@ -29,8 +22,7 @@ class Route
 
     protected $name = '';
 
-
-    public function concrete(RouteContract $route)
+    public static function addToCollector(RouteContract $route)
     {
         $collector = RouteCollector::getInstance();
         $collector->addRoute($route);
@@ -51,35 +43,10 @@ class Route
         return $this;
     }
 
-    public function admin()
+    public function scope(RouteScopeEnum $scope)
     {
-        $route = new AdminRoute();
-        $route->scope = RouteScopeEnum::ADMIN;
-        return $this->concrete($route);
-    }
-
-    public function rest()
-    {
-        $route = new RestRoute();
-        $route->scope = RouteScopeEnum::REST;
-        return $this->concrete($route);
-
-    }
-
-    public function web()
-    {
-        $route = new WebRoute();
-        $route->scope = RouteScopeEnum::WEB;
-        return $this->concrete($route);
-
-    }
-
-    public function ajax()
-    {
-        $route = new AjaxRoute();
-        $route->scope = RouteScopeEnum::AJAX;
-        return $this->concrete($route);
-
+        $this->scope = $scope;
+        return $this;
     }
 
     public function method(RouteHttpMethodEnum $method = RouteHttpMethodEnum::GET)

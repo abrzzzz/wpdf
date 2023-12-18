@@ -1,14 +1,14 @@
 <?php 
 namespace Abrz\WPDF\Facades;
 
-use Illuminate\Support\Facades\Facade;
+use Abrz\WPDF\Include\Facade;
 
-class Route extends Facade
+class AdminRoute extends Facade
 {
 
     protected static function getFacadeAccessor() : string 
     {
-        return "route";   
+        return 'route.admin';   
     }
 
 }

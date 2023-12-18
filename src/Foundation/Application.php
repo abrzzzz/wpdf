@@ -331,6 +331,7 @@ class Application extends Container implements FoundationApplication
         $this->instance('path.database', $this->databasePath());
         $this->instance('path.resources', $this->resourcePath());
         $this->instance('path.bootstrap', $this->bootstrapPath());
+        $this->instance('path.route', $this->routePath());
 
         $this->useLangPath(value(function () {
             if (is_dir($directory = $this->resourcePath('lang'))) {
@@ -352,6 +353,17 @@ class Application extends Container implements FoundationApplication
         $appPath = $this->appPath ?: $this->basePath.DIRECTORY_SEPARATOR.'app';
 
         return $appPath.($path != '' ? DIRECTORY_SEPARATOR.$path : '');
+    }
+
+    /**
+     * Get the path to the application "app" directory.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    public function routePath($path = '')
+    {
+        return $this->basePath.DIRECTORY_SEPARATOR.'route'.($path != '' ? DIRECTORY_SEPARATOR.$path : '');
     }
 
     /**
@@ -1301,7 +1313,7 @@ class Application extends Container implements FoundationApplication
             'db.schema' => [\Illuminate\Database\Schema\Builder::class],
             'config' => [\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class],
             'events' => [\Illuminate\Events\Dispatcher::class, \Illuminate\Contracts\Events\Dispatcher::class],
-            'route' => [\Abrz\WPDF\Services\Route\RouteServiceProvider::class],
+            'route' => [\Abrz\WPDF\Services\Route\Contracts\RouteContract::class],
             'request' => [\Illuminate\Http\Request::class, \Symfony\Component\HttpFoundation\Request::class],
             'files' => [\Illuminate\Filesystem\Filesystem::class],
             'filesystem' => [\Illuminate\Filesystem\FilesystemManager::class, \Illuminate\Contracts\Filesystem\Factory::class],

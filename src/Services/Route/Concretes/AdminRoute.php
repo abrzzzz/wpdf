@@ -2,6 +2,7 @@
 namespace Abrz\WPDF\Services\Route\Concretes;
 
 use Abrz\WPDF\Services\Route\Contracts\RouteContract;
+use Abrz\WPDF\Services\Route\Enums\RouteScopeEnum;
 use Abrz\WPDF\Services\Route\Route;
 
 class AdminRoute extends Route implements RouteContract
@@ -17,6 +18,12 @@ class AdminRoute extends Route implements RouteContract
 
     private AdminRoute|null $parent = null;
 
+
+    public function __construct()
+    {
+        $this->scope(RouteScopeEnum::ADMIN) 
+        ->addToCollector($this);
+    }
 
     public function register()
     {

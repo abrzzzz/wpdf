@@ -2,14 +2,21 @@
 namespace Abrz\WPDF\Services\Route\Concretes;
 
 use Abrz\WPDF\Services\Route\Contracts\RouteContract;
+use Abrz\WPDF\Services\Route\Enums\RouteScopeEnum;
 use Abrz\WPDF\Services\Route\Route;
 use \Illuminate\Support\Str;
 
 class AjaxRoute extends Route implements RouteContract
 {
 
-    private $action = "";
+    private $action;
  
+    public function __construct()
+    {
+        $this->scope(RouteScopeEnum::AJAX)
+        ->addToCollector($this);
+    }
+
     public function register()
     {
         add_action( "wp_ajax_{$this->getAction()}", [$this, 'wpResgisterAjaxRoute'] );

@@ -8,7 +8,7 @@ class FileDirect extends Facade
 
     protected static function getFacadeAccessor() : string 
     {
-        return "file.direct";   
+        return "wp.file.direct";   
     }
 
 }

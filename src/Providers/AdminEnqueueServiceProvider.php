@@ -26,22 +26,7 @@ class AdminEnqueueServiceProvider extends ServiceProvider
     public function boot()
     {
         
-        $enqueuer = $this->app->make('admin_enqueuer');
-        $js =  config('enqueue.admin.js');
-        if($cjs = count($js))
-        {
-            for ($i=0; $i < $cjs; $i++) { 
-                $enqueuer->js($js[$i]);
-            }
-        }
 
-        $css = config('enqueue.admin.css');
-        if($ccss = count($css))
-        {
-            for ($i=0; $i < $ccss; $i++) { 
-                $enqueuer->css($css[$i]);
-            }
-        }
 
     }
 

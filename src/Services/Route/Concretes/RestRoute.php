@@ -2,6 +2,7 @@
 namespace Abrz\WPDF\Services\Route\Concretes;
 
 use Abrz\WPDF\Services\Route\Contracts\RouteContract;
+use Abrz\WPDF\Services\Route\Enums\RouteScopeEnum;
 use Abrz\WPDF\Services\Route\Route;
 use WP_Error;
 
@@ -11,6 +12,12 @@ class RestRoute extends Route implements RouteContract
     private $namespace = '';
 
     private $permission = true;
+
+    public function __construct()
+    {
+        $this->scope(RouteScopeEnum::REST)
+        ->addToCollector($this);
+    }
 
     public function register()
     {   

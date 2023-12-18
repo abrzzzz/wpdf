@@ -148,6 +148,29 @@ if (! function_exists('broadcast')) {
     }
 }
 
+if (! function_exists('fake') && class_exists(\Faker\Factory::class)) {
+    /**
+     * Get a faker instance.
+     *
+     * @param  ?string  $locale
+     * @return \Faker\Generator
+     */
+    function fake($locale = null)
+    {
+        $locale ??= app('config')->get('app.faker_locale') ?? 'en_US';
+
+        $abstract = \Faker\Generator::class.':'.$locale;
+
+        if (! app()->bound($abstract)) {
+            app()->singleton($abstract, fn () => \Faker\Factory::create($locale));
+        }
+
+        return app()->make($abstract);
+    }
+}
+
+
+
 if (! function_exists('cache')) {
     /**
      * Get / set the specified cache value.
@@ -783,24 +806,7 @@ if (! function_exists('trans_choice')) {
     }
 }
 
-if (! function_exists('__')) {
-    /**
-     * Translate the given message.
-     *
-     * @param  string|null  $key
-     * @param  array  $replace
-     * @param  string|null  $locale
-     * @return string|array|null
-     */
-    function __($key = null, $replace = [], $locale = null)
-    {
-        if (is_null($key)) {
-            return $key;
-        }
 
-        return trans($key, $replace, $locale);
-    }
-}
 
 if (! function_exists('url')) {
     /**

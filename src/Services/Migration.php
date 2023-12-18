@@ -21,10 +21,10 @@ class Migration
             return;
         } 
 
-        $files = FileDirect::dirlist(App::databasePath());
+        $files = FileDirect::dirlist(self::dbDir());
         foreach ($files as $name => $meta) 
         {
-            $class = Extractor::getClassFromFile($name, App::databasePath());
+            $class = Extractor::getClassFromFile($name, self::dbDir());
             if($class)
             {
                 $class::up();                               
@@ -48,10 +48,10 @@ class Migration
             return;
         }
 
-        $files = FileDirect::dirlist(App::databasePath());
+        $files = FileDirect::dirlist(self::dbDir());
         foreach ($files as $name => $meta) 
         {
-            $class = Extractor::getClassFromFile($name, App::databasePath());
+            $class = Extractor::getClassFromFile($name, self::dbDir());
             if($class)
             {
                 $class::down();                               
@@ -66,6 +66,11 @@ class Migration
     {
         self::down($classes);
         self::up($classes);
+    }
+
+    private static function dbDir()
+    {
+        return App::databasePath() . '/Migrations';
     }
 
     

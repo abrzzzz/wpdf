@@ -149,6 +149,7 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         array (
             'Fruitcake\\Cors\\' => 15,
             'Firebase\\JWT\\' => 13,
+            'Faker\\' => 6,
         ),
         'D' => 
         array (
@@ -164,6 +165,7 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
             'Composer\\MetadataMinifier\\' => 26,
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
+            'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -424,6 +426,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
+        ),
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
@@ -459,6 +465,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         'Composer\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
+        ),
+        'Carbon\\Doctrine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
         ),
         'Carbon\\' => 
         array (
@@ -603,6 +613,10 @@ class ComposerStaticInitcc5115c1eb15b5c62630ccd58dc74cbb
         'WP_CLI\\Fetchers\\UnfilteredPlugin' => __DIR__ . '/..' . '/wp-cli/checksum-command/src/WP_CLI/Fetchers/UnfilteredPlugin.php',
         'WP_CLI\\JsonManipulator' => __DIR__ . '/..' . '/wp-cli/package-command/src/WP_CLI/JsonManipulator.php',
         'WP_CLI\\LanguagePackUpgrader' => __DIR__ . '/..' . '/wp-cli/language-command/src/WP_CLI/LanguagePackUpgrader.php',
+        'WP_CLI\\Package\\Compat\\Min_Composer_1_10\\NullIOMethodsTrait' => __DIR__ . '/..' . '/wp-cli/package-command/src/WP_CLI/Package/Compat/Min_Composer_1_10/NullIOMethodsTrait.php',
+        'WP_CLI\\Package\\Compat\\Min_Composer_2_3\\NullIOMethodsTrait' => __DIR__ . '/..' . '/wp-cli/package-command/src/WP_CLI/Package/Compat/Min_Composer_2_3/NullIOMethodsTrait.php',
+        'WP_CLI\\Package\\Compat\\NullIOMethodsTrait' => __DIR__ . '/..' . '/wp-cli/package-command/src/WP_CLI/Package/Compat/NullIOMethodsTrait.php',
+        'WP_CLI\\Package\\ComposerIO' => __DIR__ . '/..' . '/wp-cli/package-command/src/WP_CLI/Package/ComposerIO.php',
         'WP_CLI\\ParsePluginNameInput' => __DIR__ . '/..' . '/wp-cli/extension-command/src/WP_CLI/ParsePluginNameInput.php',
         'WP_CLI\\ParseThemeNameInput' => __DIR__ . '/..' . '/wp-cli/extension-command/src/WP_CLI/ParseThemeNameInput.php',
         'WP_CLI\\SearchReplacer' => __DIR__ . '/..' . '/wp-cli/search-replace-command/src/WP_CLI/SearchReplacer.php',
