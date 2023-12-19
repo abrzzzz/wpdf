@@ -26,7 +26,7 @@ class Taxonomy implements HookContract
      *
      * @var string
      */
-    private string $slug;
+    private string $slug = "";
 
     /**
      * $hirarchical
@@ -36,12 +36,12 @@ class Taxonomy implements HookContract
     private bool $hirarchical = true;
 
     /**
-     * $showUi
+     * $showUI
      *
      * @var boolean
      */
     private bool $showUI = true;
-
+    
     /**
      * $showAdminCol
      *
@@ -59,37 +59,36 @@ class Taxonomy implements HookContract
     /**
      * $labels
      *
-     * @var string
+     * @var array
      */
-    private string $labels;
+    private array $labels = [];
 
     /**
      * $postTypes
      *
      * @var array
      */
-    private array $postTypes;
+    private array $postTypes = [];
 
     /**
-     * Regiseter the taxonomy
+     * Register the taxonomy
      *
      * @return void
      */
     public function register()
     {
        add_action( 'init', function(){
-        $args   = array(
-            'hierarchical'      => $this->hirarchical, // make it hierarchical (like categories)
-            'labels'            => $this->getLabels(),
-            'show_ui'           => $this->showUI,
-            'show_admin_column' => $this->showAdminCol,
-            'query_var'         => $this->queryVar,
-            'rewrite'           => [ 'slug' => $this->getSlug() ],
-        );
+            $args   = array(
+                'hierarchical'      => $this->hirarchical, // make it hierarchical (like categories)
+                'labels'            => $this->getLabels(),
+                'show_ui'           => $this->showUI,
+                'show_admin_column' => $this->showAdminCol,
+                'query_var'         => $this->queryVar,
+                'rewrite'           => [ 'slug' => $this->getSlug() ],
+            );
 
-        register_taxonomy( $this->name, $this->postTypes, $args );
-       
-    });
+            register_taxonomy( $this->name, $this->postTypes, $args );
+        });
     }
 
     /**
@@ -158,7 +157,7 @@ class Taxonomy implements HookContract
      * @param boolean $hirarchical
      * @return self
      */
-    public function hirarchical(bool $hirarchical = true) : self
+    public function isHirarchical(bool $hirarchical = true) : self
     {
         $this->hirarchical = $hirarchical;
         return $this;
@@ -199,13 +198,13 @@ class Taxonomy implements HookContract
         $this->showAdminCol = $showAdminCol;
         return $this;
     }
-
+        
     /**
      * get $name
      *
      * @return string
      */
-    public function getName()  : string
+    public function getName() : string
     {
         return Str::plural(
             Str::replace(['-', '_'], ' ', $this->name)
@@ -217,7 +216,7 @@ class Taxonomy implements HookContract
      *
      * @return string
      */
-    public function getSingularName()  : string
+    public function getSingularName() : string
     {
         return $this->singularName ?? Str::singular(
             Str::replace(['-', '_'], ' ', $this->name)
@@ -229,7 +228,7 @@ class Taxonomy implements HookContract
      *
      * @return string
      */
-    public function getSlug()  : string
+    public function getSlug() : string
     {
         if($this->slug) return Str::slug($this->slug);
         return Str::slug($this->name);
@@ -240,9 +239,9 @@ class Taxonomy implements HookContract
      *
      * @return array
      */
-    private function getLabels()  : array
+    public function getLabels() : array
     {
-        if($this->labels) return $$this->labels;
+        if($this->labels) return $this->labels;
         
         return [
             'name'              => _x( $this->getName(), 'taxonomy general name' ),
@@ -261,3 +260,4 @@ class Taxonomy implements HookContract
 
 
 }
+
