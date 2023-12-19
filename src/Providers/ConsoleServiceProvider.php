@@ -11,11 +11,14 @@ use ReflectionMethod;
 class ConsoleServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register Applicatin's service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
-        
-        // register 
-
+        // nothing yet
     }
 
     public function boot() : void

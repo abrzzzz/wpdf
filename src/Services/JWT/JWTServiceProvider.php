@@ -8,6 +8,11 @@ use Illuminate\Support\ServiceProvider;
 class JWTServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register JWT service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
         $this->app->bind('JWT', function(Application $app){

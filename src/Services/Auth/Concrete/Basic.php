@@ -8,6 +8,12 @@ use App\Models\User;
 class Basic extends Auth implements AuthContract
 {
 
+    /**
+     * 
+     *
+     * @param array $credentials
+     * @return boolean
+     */
     public function register(array $credentials) : bool
     {
         return wp_insert_user($credentials);

@@ -6,12 +6,32 @@ use Abrz\WPDF\Contracts\HookContract;
 class CronInterval implements HookContract
 {
 
-    private $name;
+    /**
+     * $name
+     *
+     * @var string
+     */
+    private string $name;
 
-    private $interval;
+    /**
+     * $interval
+     *
+     * @var string
+     */
+    private string $interval;
+    
+    /**
+     * $label
+     *
+     * @var string
+     */
+    private string $label;
 
-    private $label;
-
+    /**
+     * Register the cron interval
+     *
+     * @return void
+     */
     public function register()
     {
         add_filter( 'cron_schedules', function($schedules)
@@ -25,19 +45,37 @@ class CronInterval implements HookContract
 
     }
 
-    public function name(string $name)
+    /**
+     * set $name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function name(string $name) : self
     {
         $this->name = $name;
         return $this;
     }
-
-    public function interval(string $interval)
+    
+    /**
+     * set $interval
+     *
+     * @param string $interval
+     * @return self
+     */
+    public function interval(string $interval) : self
     {
         $this->interval = $interval;
         return $this;
     }
     
-    public function label(string $label)
+    /**
+     * set $label
+     *
+     * @param string $label
+     * @return self
+     */
+    public function label(string $label) : self
     {
         $this->label = $label;
         return $this;

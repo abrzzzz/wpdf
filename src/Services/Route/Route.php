@@ -8,20 +8,61 @@ use Abrz\WPDF\Services\Route\Enums\RouteScopeEnum;
 abstract class Route
 {
 
-    protected string $path;
-
-    protected RouteScopeEnum $scope = RouteScopeEnum::WEB;
-
-    protected RouteHttpMethodEnum $method = RouteHttpMethodEnum::GET;
-
-    protected $controller;
-
-    protected $function;
-
-    protected $middleware = [];
-
+    /**
+     * route's name
+     *
+     * @var string
+     */
     protected $name = '';
 
+    /**
+     * route's path
+     *
+     * @var string
+     */
+    protected string $path;
+
+    /**
+     * route's scope
+     *
+     * @var RouteScopeEnum
+     */
+    protected RouteScopeEnum $scope;
+
+    /**
+     * route's http method
+     *
+     * @var RouteHttpMethodEnum
+     */
+    protected RouteHttpMethodEnum $method = RouteHttpMethodEnum::GET;
+
+    /**
+     * route's controller
+     *
+     * @var string
+     */
+    protected string $controller;
+
+    /**
+     * route's controller's method
+     *
+     * @var string
+     */
+    protected string $function;
+
+    /**
+     * route's middlewares
+     *
+     * @var array
+     */
+    protected $middleware = [];
+
+    /**
+     * add the route to the collector
+     *
+     * @param RouteContract $route
+     * @return void
+     */
     public static function addToCollector(RouteContract $route)
     {
         $collector = RouteCollector::getInstance();
@@ -29,39 +70,73 @@ abstract class Route
         return $route;
     }
  
-    public function controller(array $controller)
+    /**
+     * set route's controller class and metod
+     *
+     * @param array $controller
+     * @return self
+     */
+    public function controller(array $controller) : self
     {
         $this->controller = $controller[0];
         $this->function = $controller[1];
         return $this;
     }
 
-    public function middleware(...$middleware)
+    /**
+     * set route's middlewares
+     *
+     * @param [type] ...$middleware
+     * @return self
+     */
+    public function middleware(...$middleware) : self|null
     {
-        if(!$middleware) return;
+        if(!$middleware) return null;
         $this->middleware = array_merge($this->middleware, $middleware);
         return $this;
     }
 
-    public function scope(RouteScopeEnum $scope)
+    /**
+     * set route scope
+     *
+     * @return void
+     */
+    public function scope()
     {
-        $this->scope = $scope;
-        return $this;
+        // this method has not been implemented by this class
     }
 
-    public function method(RouteHttpMethodEnum $method = RouteHttpMethodEnum::GET)
+    /**
+     * set route's http method
+     *
+     * @param [type] $method
+     * @return self
+     */
+    public function method(RouteHttpMethodEnum $method = RouteHttpMethodEnum::GET) : self
     {
         $this->method = $method;
         return $this;
     }
 
-    public function path(string $path)
+    /**
+     * set route's path
+     *
+     * @param string $path
+     * @return self
+     */
+    public function path(string $path) : self
     {
         $this->path = $path;
         return $this;
     }
 
-    public function name(string $name)
+    /**
+     * set route's name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function name(string $name) : self
     {
         $this->name = $name;
         return $this;

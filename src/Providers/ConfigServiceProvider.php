@@ -8,6 +8,11 @@ use Illuminate\Support\ServiceProvider;
 class ConfigServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register App's config service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
         $this->app->singleton('config', function(Application $app){

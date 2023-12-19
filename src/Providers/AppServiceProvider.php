@@ -7,9 +7,14 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register application Service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
-        $this->app->singleton('app', function(Application $app){
+        $this->app->instance('app', function(Application $app){
             return $app::getInstance();
         });
     }

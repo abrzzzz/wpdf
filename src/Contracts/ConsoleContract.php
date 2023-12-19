@@ -1,11 +1,14 @@
 <?php 
 namespace Abrz\WPDF\Contracts;
 
-use WP_CLI;
-
 interface ConsoleContract
 {
-
+    
+    /**
+     * Execute console command logic 
+     *
+     * @return void
+     */
     public function handle(); 
 
 }

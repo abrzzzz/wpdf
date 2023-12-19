@@ -4,19 +4,61 @@ namespace Abrz\WPDF\Contracts;
 interface WPAPIContract
 {
 
-    public static function setting();
+    /**
+     * New Instance of Setting API class 
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function setting() : HookContract;
 
-    public static function shortcode();
+    /**
+     * New Instance of Shortcode API
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function shortcode() : HookContract;
 
-    public static function postType();
+    /**
+     * New Instance of postType API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function postType() : HookContract;
     
-    public static function taxonomy();
+    /**
+     * New Instance of taxonomy API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function taxonomy() : HookContract;
     
-    public static function cron();
+    /**
+     * New Instance of cron API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function cron() : HookContract;
 
-    public static function metabox();
+    /**
+     * New Instance of metabox API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function metabox() : HookContract;
 
-    public static function hook();
+    /**
+     * New Instance of hook API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function hook() : HookContract;
+
+    /**
+     * New Instance of Enqueuer API class
+     *
+     * @return Abrz\WPDF\Contracts\HookContract
+     */
+    public static function enqueuer() : HookContract;
 
     // public function heartbeat();
 

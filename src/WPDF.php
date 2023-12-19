@@ -4,6 +4,5 @@ namespace Abrz\WPDF;
 class WPDF
 {
 
-        
-
+    
 }

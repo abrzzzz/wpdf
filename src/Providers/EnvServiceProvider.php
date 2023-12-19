@@ -9,13 +9,17 @@ use Symfony\Component\Dotenv\Dotenv;
 class EnvServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register env service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
         $this->app->singleton('env', function(Application $app){
             return new Dotenv();
         });
     }
-
 
 
     /**

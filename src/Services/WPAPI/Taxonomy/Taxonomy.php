@@ -7,31 +7,79 @@ use Illuminate\Support\Str;
 class Taxonomy implements HookContract
 {
 
-
-    private $name;
+    /**
+     * $name
+     *
+     * @var string
+     */
+    private string $name;
     
-    private $singularName;
+    /**
+     * $singularName
+     *
+     * @var string
+     */
+    private string $singularName;
 
-    private $slug;
+    /**
+     * $slug
+     *
+     * @var string
+     */
+    private string $slug;
 
-    private $isHirarchical = true;
+    /**
+     * $hirarchical
+     *
+     * @var boolean
+     */
+    private bool $hirarchical = true;
 
-    private $showUI = true;
-    
-    private $showAdminCol = true;
+    /**
+     * $showUi
+     *
+     * @var boolean
+     */
+    private bool $showUI = true;
 
-    private $queryVar = true;
+    /**
+     * $showAdminCol
+     *
+     * @var boolean
+     */
+    private bool $showAdminCol = true;
 
-    private $labels;
+    /**
+     * $queryVar
+     *
+     * @var boolean
+     */
+    private bool $queryVar = true;
 
+    /**
+     * $labels
+     *
+     * @var string
+     */
+    private string $labels;
+
+    /**
+     * $postTypes
+     *
+     * @var array
+     */
     private array $postTypes;
 
-
+    /**
+     * Regiseter the taxonomy
+     *
+     * @return void
+     */
     public function register()
     {
        add_action( 'init', function(){
         $args   = array(
-            'hierarchical'      => $this->isHirarchical, // make it hierarchical (like categories)
+            'hierarchical'      => $this->hirarchical, // make it hierarchical (like categories)
             'labels'            => $this->getLabels(),
             'show_ui'           => $this->showUI,
             'show_admin_column' => $this->showAdminCol,
@@ -44,85 +92,155 @@ class Taxonomy implements HookContract
     });
     }
 
-
-    public function name(string $name)
+    /**
+     * set $name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function name(string $name) : self
     {
         $this->name = $name;
         return $this;
     }   
 
-    public function singularName(string $singularName)
+    /**
+     * set $singularName
+     *
+     * @param string $singularName
+     * @return self
+     */
+    public function singularName(string $singularName) : self
     {
         $this->singularName = $singularName;
         return $this;
     }
 
-    public function slug(string $slug)
+    /**
+     * set $slug
+     *
+     * @param string $slug
+     * @return self
+     */
+    public function slug(string $slug) : self
     {
         $this->slug = $slug;
         return $this;
     }
 
-
-
-    public function labels(array $labels)
+    /**
+     * set $labels
+     *
+     * @param array $labels
+     * @return self
+     */
+    public function labels(array $labels) : self
     {
         $this->labels = $labels;
         return $this;
     }
 
-    public function postType(...$postType)
+    /**
+     * set $postTypes
+     *
+     * @param [type] ...$postType
+     * @return self
+     */
+    public function postType(...$postType) : self
     {
         $this->postTypes = $postType;
         return $this;
     }
 
-    public function isHirarchical(bool $isHirarchical = true)
+    /**
+     * set $hirarchical
+     *
+     * @param boolean $hirarchical
+     * @return self
+     */
+    public function hirarchical(bool $hirarchical = true) : self
     {
-        $this->isHirarchical($isHirarchical);
+        $this->hirarchical = $hirarchical;
         return $this;
     }
 
-    public function showUI(bool $showUI = true)
+    /**
+     * set $showUI
+     *
+     * @param boolean $showUI
+     * @return self
+     */
+    public function showUI(bool $showUI = true) : self
     {
         $this->showUI = $showUI;
         return $this;
     }
 
-    public function queryVar(bool $queryVar = true)
+    /**
+     * set $queryVar
+     *
+     * @param boolean $queryVar
+     * @return self
+     */
+    public function queryVar(bool $queryVar = true) : self
     {
         $this->queryVar = $queryVar;
         return $this;
     }
 
-    public function showAdminCol(bool $showAdminCol = true)
+    /**
+     * set $showAdminCol
+     *
+     * @param boolean $showAdminCol
+     * @return self
+     */
+    public function showAdminCol(bool $showAdminCol = true) : self
     {
         $this->showAdminCol = $showAdminCol;
         return $this;
     }
 
-
-    public function getName()
+    /**
+     * get $name
+     *
+     * @return string
+     */
+    public function getName()  : string
     {
         return Str::plural(
             Str::replace(['-', '_'], ' ', $this->name)
         );
     }
 
-    public function getSingularName()
+    /**
+     * get $singularName
+     *
+     * @return string
+     */
+    public function getSingularName()  : string
     {
         return $this->singularName ?? Str::singular(
             Str::replace(['-', '_'], ' ', $this->name)
         );
     }
 
-    public function getSlug()
+    /**
+     * get $slug
+     *
+     * @return string
+     */
+    public function getSlug()  : string
     {
         if($this->slug) return Str::slug($this->slug);
         return Str::slug($this->name);
     }
 
-    private function getLabels()
+    /**
+     * get $labels
+     *
+     * @return array
+     */
+    private function getLabels()  : array
     {
         if($this->labels) return $$this->labels;
         

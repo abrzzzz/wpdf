@@ -4,9 +4,20 @@ namespace Abrz\WPDF\Include\Controller;
 abstract class BaseController
 {
 
+    /**
+     * Middewares of the controller
+     *
+     * @var array
+     */
     private $middleware = [];
 
-    public function middleware(array $middleware = [])
+    /**
+     * Compact all the middlewares
+     *
+     * @param array $middleware
+     * @return void
+     */
+    public function middleware(array $middleware = []) : self
     {
         for ($i=0; $i < count($middleware); $i++) { 
             $this->middleware[] = $middleware[$i];
@@ -14,13 +25,25 @@ abstract class BaseController
         return $this;
     }
 
-    public function getMiddleware()
+    /**
+     * Get The middlewares
+     *
+     * @return array
+     */
+    public function getMiddleware() : array
     {
         if(!$this->middleware) return [];
         return $this->middleware;
     }
 
-    public function callAction($closure, array $params = [])
+    /**
+     * Execute all the middlewares before going forward to the specified method
+     *
+     * @param [type] $closure
+     * @param array $params
+     * @return Mixed
+     */
+    public function callAction($closure, array $params = []) : mixed
     { 
         $class = get_called_class();
         $request = app('request');

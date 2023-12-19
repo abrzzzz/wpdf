@@ -7,11 +7,25 @@ use Closure;
 class Shortcode implements HookContract
 {
 
-    private $tag;
+    /**
+     * $tag
+     *
+     * @var string
+     */
+    private string $tag;
 
+    /**
+     * $callback
+     *
+     * @var Closure|string
+     */
     private Closure|string $callback;
 
-
+    /**
+     * Register shortcode
+     *
+     * @return void
+     */
     public function register()
     {
 
@@ -21,13 +35,25 @@ class Shortcode implements HookContract
 
     }
 
-    public function tag( string $tag )
+    /**
+     * set $tag
+     *
+     * @param string $tag
+     * @return self
+     */
+    public function tag( string $tag ) : self
     {
         $this->tag = $tag;
         return $this;
     }
 
-    public function callback( Closure|string $callback )
+    /**
+     * set $callback
+     *
+     * @param Closure|string $callback
+     * @return self
+     */
+    public function callback( Closure|string $callback ) : self
     {
         $this->callback =  $callback;
         return $this;

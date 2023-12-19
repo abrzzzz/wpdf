@@ -8,6 +8,11 @@ use Illuminate\Support\ServiceProvider;
 class ExtractorServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register Extractor service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
 

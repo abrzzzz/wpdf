@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 class IsAdminMiddleware implements MiddlewareContract
 {
 
+    /**
+     * Undocumented function
+     *
+     * @param Request $request
+     * @param Closure $next
+     * @return void
+     */
     public function handle(Request $request, Closure $next)
     {
         if(!is_super_admin()){

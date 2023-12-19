@@ -6,19 +6,53 @@ use Abrz\WPDF\Contracts\HookContract;
 class PostType implements HookContract
 {
 
-    private $id;
+    /**
+     * $id
+     *
+     * @var string
+     */
+    private string $id;
 
-    private $name;
+    /**
+     * $name
+     *
+     * @var string
+     */
+    private string $name;
 
-    private $singularName;
+    /**
+     * $singularName
+     *
+     * @var string
+     */
+    private string $singularName;
 
-    private $isPublic = false;
+    /**
+     * $isPublic
+     *
+     * @var boolean
+     */
+    private bool $isPublic = false;
 
-    private $hasArchive = false;
+    /**
+     * $hasArchive
+     *
+     * @var boolean
+     */
+    private bool $hasArchive = false;
     
-    private $slug;
+    /**
+     * $slug
+     *
+     * @var string
+     */
+    private string $slug;
 
-
+    /**
+     * Register post type
+     *
+     * @return void
+     */
     public function register()
     {
         add_action('init', function()
@@ -41,42 +75,74 @@ class PostType implements HookContract
 
     }
 
-    public function id(string $id)
+    /**
+     * set $id
+     *
+     * @param string $id
+     * @return self
+     */
+    public function id(string $id) : self
     {
         $this->id = $id;
         return $this;
     }
 
-    public function name(string $name)
+    /**
+     * set $name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function name(string $name) : self
     {
         $this->name = $name;
         return $this;
     }   
 
-    public function singularName(string $singularName)
+    /**
+     * set $singularName
+     *
+     * @param string $singularName
+     * @return self
+     */
+    public function singularName(string $singularName) : self
     {
         $this->singularName = $singularName;
         return $this;
     }
 
-    public function isPublic()
+    /**
+     * set $isPublic
+     *
+     * @return self
+     */
+    public function isPublic() : self
     {
         $this->isPublic = true;
         return $this;
     }
 
-    public function hasArchive()
+    /**
+     * set $hasArchive
+     *
+     * @return self
+     */
+    public function hasArchive() : self
     {
         $this->hasArchive = true;
         return $this;
     }
 
-    public function slug(string $slug)
+    /**
+     * set $slug
+     *
+     * @param string $slug
+     * @return self
+     */
+    public function slug(string $slug) : self
     {
         $this->slug = $slug;
         return $this;
     }
-
-
 
 }

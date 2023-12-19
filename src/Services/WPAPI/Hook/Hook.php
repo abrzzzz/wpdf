@@ -8,52 +8,117 @@ use ReflectionFunction;
 
 class Hook implements HookContract
 {
+    
+    /**
+     * $name
+     *
+     * @var string
+     */
+    private string $name;
 
-    private $name;
-
+    /**
+     * $callback
+     *
+     * @var Closure|string
+     */
     private Closure|string $callback;
 
+    /**
+     * $type
+     *
+     * @var string|HookTypeEnum
+     */
     private string|HookTypeEnum $type = HookTypeEnum::ACTION; 
 
+    /**
+     * $priority
+     *
+     * @var integer
+     */
     private int $priority = 10;
 
+    /**
+     * $acceptedArgs
+     *
+     * @var integer
+     */
     private int $acceptedArgs = 1;
 
+    /**
+     * register the hook
+     *
+     * @return void
+     */
     public function register()
     {
         $this->applyHook();
     }
 
-    public function name( string $name )
+    /**
+     * set $name
+     *
+     * @param string $name
+     * @return self
+     */
+    public function name( string $name ) : self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function type( string|HookTypeEnum $type )
+    /**
+     * set $type
+     *
+     * @param string|HookTypeEnum $type
+     * @return self
+     */
+    public function type( string|HookTypeEnum $type ) : self
     {
         $this->type = $type;
         return $this;
     }
 
-    public function callback( Closure|string $callback )
+    /**
+     * set $callback
+     *
+     * @param Closure|string $callback
+     * @return self
+     */
+    public function callback( Closure|string $callback ) : self
     {
         $this->callback =  $callback;
         return $this;
     }
 
-    public function priority( int $priority )
+    /**
+     * set $priority
+     *
+     * @param integer $priority
+     * @return self
+     */
+    public function priority( int $priority ) : self
     {
         $this->priority =  $priority;
         return $this;
     }
 
-    public function acceptedArgs( int $acceptedArgs )
+    /**
+     * set $accepterArgs
+     *
+     * @param integer $acceptedArgs
+     * @return self
+     */
+    public function acceptedArgs( int $acceptedArgs ) : self
     {
         $this->acceptedArgs =  $acceptedArgs;
         return $this;
     }
 
+    /**
+     * Execute  & apply the wp hook
+     *
+     * @return void
+     */
     private function applyHook()
     {
 
@@ -78,9 +143,14 @@ class Hook implements HookContract
             $this->acceptedArgs
         );   
 
-        return;
     }
 
+    /**
+     * Extract the params from the given args
+     *
+     * @param array $args
+     * @return array
+     */
     private function extractParams(array $args)
     {
         $info = new ReflectionFunction($this->callback);

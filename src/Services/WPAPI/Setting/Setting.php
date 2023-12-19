@@ -9,18 +9,53 @@ use Closure;
 class Setting implements HookContract
 {
 
-    private $name;
+    /**
+     * $name
+     *
+     * @var string
+     */
+    private string $name;
 
-    private $sectionTitle;
+    /**
+     * $sectionTitle
+     *
+     * @var string
+     */
+    private string $sectionTitle;
 
-    private $sectionCallback;
+    /**
+     * $sectionCallback
+     *
+     * @var string|Closure
+     */
+    private string|Closure $sectionCallback;
 
-    private $fieldTitle;
+    /**
+     * $fieldTitle
+     *
+     * @var string
+     */
+    private string $fieldTitle;
 
-    private $fieldCallback;
+    /**
+     * $fieldCallback
+     *
+     * @var string|Closure
+     */
+    private string|Closure $fieldCallback;
 
+    /**
+     * $optionGroup
+     *
+     * @var string
+     */
     private string $optionGroup = OptionGroupEnum::OPTIONS;
 
+    /**
+     * Register setting
+     *
+     * @return void
+     */
     public  function register() 
     {
         add_action('admin_init', function(){
@@ -51,38 +86,73 @@ class Setting implements HookContract
         });        
     }
 
-
+    /**
+     * set $name
+     *
+     * @param string $name
+     * @return self
+     */
     public function name(string $name) : self
     {
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * set $sectionTitle
+     *
+     * @param string $sectionTitle
+     * @return self
+     */
     public function sectionTitle(string $sectionTitle) : self
     {
         $this->sectionTitle = $sectionTitle;
         return $this;
     }
 
+    /**
+     * set $fieldTitle
+     *
+     * @param string $fieldTitle
+     * @return self
+     */
     public function fieldtitle(string $fieldTitle) : self
     {
         $this->fieldTitle = $fieldTitle;
         return $this;
     }
 
-    public function optionGroup(string $optionGroup)
+    /**
+     * set $optionGroup
+     *
+     * @param string $optionGroup
+     * @return self     
+     */
+    public function optionGroup(string $optionGroup) : self
     {
         $this->optionGroup = $optionGroup;
         return $this;
     }
 
-    public function sectionCallback(Closure $closure)
+    /**
+     * set $sectionCallback
+     *
+     * @param string|Closure $closure
+     * @return self
+     */
+    public function sectionCallback(string|Closure $closure) : self
     {
         $this->sectionCallback =  $closure;
         return $this;
     }
 
-    public function fieldCallback(Closure $closure)
+    /**
+     * set $fieldCallback
+     *
+     * @param string|Closure $closure
+     * @return self
+     */
+    public function fieldCallback(string|Closure $closure) : self
     {
         $this->fieldCallback = $closure;
         return $this;

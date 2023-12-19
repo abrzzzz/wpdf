@@ -8,6 +8,11 @@ use WP_Filesystem_Direct;
 class FileDirectServiceProvider extends ServiceProvider
 {
    
+    /**
+     * Register wp filesystem service.
+     *
+     * @return void
+     */
     public function register() : void 
     {
         if( !class_exists( 'WP_Filesystem_Direct' ) ) {
